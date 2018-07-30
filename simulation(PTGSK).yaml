@@ -1,0 +1,36 @@
+---
+neanidelva:
+  region_config_file: neanidelva_region.yaml
+  model_config_file: neanidelva_model.yaml
+  datasets_config_file: neanidelva_datasets.yaml
+  interpolation_config_file: neanidelva_interpolation.yaml
+  start_datetime: 2012-09-01T00:00:00
+  run_time_step: 86400  # set to 3600 1 hour time step(slower simulations, but hourly details)
+  number_of_steps: 1095    # set to 8759 for hours in 1 year
+  region_model_id: 'neanidelva-ptgsk'
+  #interpolation_id: 2   # this is optional (default 0)
+  initial_state:
+    repository:
+      class: !!python/name:shyft.repository.generated_state_repository.GeneratedStateRepository
+      params:
+        model: !!python/name:shyft.api.pt_gs_k.PTGSKModel
+    tags: []
+  references:
+  - repository: !!python/name:shyft.repository.netcdf.cf_ts_repository.CFTsRepository
+    params:
+      file: netcdf/orchestration-testdata/discharge.nc
+      var_type: discharge
+    1D_timeseries:
+    - catch_id: [1308,1394,1867,2198,2402,2545]
+      type: discharge
+      uid: smg://SMG_PROD?name=/TEV.-Tya...........-D9100A3B1060R123.999
+      run_time_step: 86400 # 3600
+    - catch_id: [1228,1443,1726,2041,2129,2195,2277,2465,2718,3002,3630,1000010,1000011]
+      type: discharge
+      uid: smg://SMG_PROD?name=/TEV.-Selbu-lok.....-D9100A3B1070R123.020
+      run_time_step: 86400 # 3600
+    - catch_id: [1996,2446,2640,3536]
+      type: discharge
+      uid: smg://SMG_PROD?name=/TEV.-Nea...........-D9100A3B1050R123.998
+      run_time_step: 86400 # 3600
+...

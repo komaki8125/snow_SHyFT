@@ -1,0 +1,23 @@
+model_t: !!python/name:shyft.api.pt_hs_k.PTHSKModel  # priestley_taylor HBV_Snow kirchner
+model_parameters:
+  ae:  # actual_evapotranspiration
+    ae_scale_factor: 0.603133018
+  hs:  # HBV_Snow
+    cfr: 0.000550204
+    cx: 0.281854159
+    lw: 0.051751484
+    ts: 0.436940844
+    tx: -0.42668965600000003  
+  kirchner:
+    c1: -3.606984865
+    c2: 0.462349299
+    c3: -0.030007472
+  p_corr:  # precipitation_correction
+    scale_factor: 0.7766866720000001
+  pt:  # priestley_taylor
+    albedo: 0.2
+    alpha: 1.26
+  routing:
+    alpha: 0.9
+    beta: 3.0
+    velocity: 0.0

@@ -1,0 +1,26 @@
+model_t: !!python/name:shyft.api.pt_ss_k.PTSSKModel  # priestley_taylor Skaugen_Snow kirchner
+model_parameters:
+  ae:  # actual_evapotranspiration
+    ae_scale_factor: 1.5
+  ss:  # Skaugen_Snow
+    alpha_0: 40.55
+    cfr: 0.0098
+    cx: 0.5857
+    d_range: 110.71
+    max_water_fraction: 0.3453
+    ts: 0.137
+    tx: -0.0042
+    unit_size: 0.1858
+  kirchner:
+    c1: -3.916197322290274
+    c2: 0.52433661533385695
+    c3: -0.019503959620315988
+  p_corr:  # precipitation_correction
+    scale_factor: 1.5
+  pt:  # priestley_taylor
+    albedo: 0.2
+    alpha: 1.26
+  routing:
+    alpha: 0.9
+    beta: 3.0
+    velocity: 0.0

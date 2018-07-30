@@ -1,0 +1,15 @@
+---
+sources:
+  - repository: !!python/name:shyft.repository.netcdf.concat_data_repository.ConcatDataRepository
+    types:
+      - precipitation
+      - wind_speed      
+      - temperature
+      - relative_humidity
+      - radiation
+    params:
+      filename: netcdf/orchestration-testdata/arome_merged_all.nc
+      nb_lead_intervals_to_drop: 0
+      nb_lead_intervals: 1
+      use_filled_values: true
+...

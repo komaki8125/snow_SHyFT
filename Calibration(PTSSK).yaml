@@ -1,0 +1,123 @@
+neanidelva:
+  model_config_file: neanidelva_simulation.yaml
+  calibrated_model_file: calibrated_model.yaml  # file where the calibrated params will go
+  optimization_method:
+    name: min_bobyqa # can be 'min_bobyqa', 'dream' or 'sceua'
+    params:
+      max_n_evaluations: 1541 #1541/1542/1543/1544 FOR CONSTANT TR use 1441/1442/1443/1444
+      tr_start: 0.1
+      tr_stop: 0.00001
+    #name: sceua
+    #params:
+      #max_n_evaluations: 2500                                                                  
+      #x_eps: 0.15                                                                               
+      #y_eps: 0.1                                                                            
+    #name: dream                                                                                 
+    #params:                                                                                    
+      #max_n_evaluations: 1500          
+  target:
+  - repository: !!python/name:shyft.repository.netcdf.cf_ts_repository.CFTsRepository
+    params:
+      file: netcdf/orchestration-testdata/discharge.nc
+      var_type: discharge
+    1D_timeseries:
+    - catch_id: [1308,1394,1867,2198,2402,2545]
+      uid: smg://SMG_PROD?name=/TEV.-Tya...........-D9100A3B1060R123.999
+      start_datetime: 2012-09-01T00:00:00
+      run_time_step: 86400 # 3600
+      number_of_steps: 1095
+      weight: 1.0
+      obj_func:
+        name: NSE # Nash–Sutcliffe efficiency (NSE) or Kling–Gupta efficiency (KGE)
+        scaling_factors:
+          s_corr: 1.0
+          s_var: 1.0
+          s_bias: 1.0
+    - catch_id: [1228,1443,1726,2041,2129,2195,2277,2465,2718,3002,3630,1000010,1000011]
+      uid: smg://SMG_PROD?name=/TEV.-Selbu-lok.....-D9100A3B1070R123.020
+      start_datetime: 2012-09-01T00:00:00
+      run_time_step: 86400 # 3600
+      number_of_steps: 1095
+      weight: 1.0
+      obj_func:
+        name: NSE # Nash–Sutcliffe efficiency (NSE) or Kling–Gupta efficiency (KGE)
+        scaling_factors:
+          s_corr: 1.0
+          s_var: 1.0
+          s_bias: 1.0
+    - catch_id: [1996,2446,2640,3536]
+      uid: smg://SMG_PROD?name=/TEV.-Nea...........-D9100A3B1050R123.998
+      start_datetime: 2012-09-01T00:00:00
+      run_time_step: 86400 # 3600
+      number_of_steps: 1095
+      weight: 1.0
+      obj_func:
+        name: NSE # Nash–Sutcliffe efficiency (NSE) or Kling–Gupta efficiency (KGE)
+        scaling_factors:
+          s_corr: 1.0
+          s_var: 1.0
+          s_bias: 1.0
+  overrides:
+    model:
+      model_t: !!python/name:shyft.api.pt_ss_k.PTSSKOptModel
+  calibration_parameters:
+    kirchner.c1:
+      min: -8.0
+      max: 0.0
+    kirchner.c2:
+      min: -1.0
+      max: 1.2
+    kirchner.c3:
+      min: -0.15
+      max: -0.03
+    ae.ae_scale_factor:
+      min: 0.55
+      max: 2.5
+    ss.alpha_0:
+      min: 10
+      max: 70
+    ss.cfr:
+      min: 0
+      max: 1.4
+    ss.cx:
+      min: 0
+      max: 7
+    ss.d_range:
+      min: 20
+      max: 300
+    ss.max_water_fraction:
+      min: 0.001
+      max: 0.35
+    ss.ts:
+      min: -0.99
+      max: 0.99
+    ss.tx:
+      min: -0.99
+      max: 0.99
+    ss.unit_size:
+      min: 0.01
+      max: 0.4
+    p_corr.scale_factor:
+      min: 0.5
+      max: 1.8
+    pt.albedo:
+      min: 0.2
+      max: 0.2
+    pt.alpha:
+      min: 1.26
+      max: 1.26
+    gm.dtf:
+      min: 6.0
+      max: 6.0
+    gm.direct_response:
+      min: 0.475
+      max: 0.475
+    routing.velocity:
+      min: 0.0
+      max: 0.0
+    routing.alpha:
+      min: 0.9
+      max: 0.9
+    routing.beta:
+      min: 3.0
+      max: 3.0
